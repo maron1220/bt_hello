@@ -2,13 +2,13 @@ from django import forms
 
 
 class HelloForm(forms.Form):
-
-    data = [
-        ('BUN上昇', 'BUN上昇'),
-        ('BUN低下', 'BUN低下'),
-        ('CRE上昇', 'CRE上昇'),
-        ('CRE低下', 'CRE低下'),
-        ('five', 'item5'),
-    ]
-    choice = forms.MultipleChoiceField(
-        label='調べる項目', choices=data, widget=forms.SelectMultiple(attrs={'size': 5}))
+    name = forms.CharField(label='Name', widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    mail = forms.EmailField(label='Email', widget=forms.EmailInput(
+        attrs={'class': 'form-control'}))
+    gender = forms.BooleanField(label='Gender', required=False,
+                                widget=forms.CheckboxInput(attrs={'class': 'form-check'}))
+    age = forms.IntegerField(label='Age', widget=forms.NumberInput(
+        attrs={'class': 'form-control'}))
+    birthday = forms.DateField(
+        label='Birth', widget=forms.DateInput(attrs={'class': 'form-control'}))
