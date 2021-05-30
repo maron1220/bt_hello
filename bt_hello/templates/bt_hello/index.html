@@ -15,9 +15,10 @@
     <tr>
       <th>data</th>
     </tr>
-  {{% for item in data %}}
+  {% for item in data %}
     <tr>
       <td>{{item}}</td>
+      <td><a href="{% url 'edit' item.id %}">Edit</a></td>
     </tr>
   {% endfor %}
   </table>

@@ -5,6 +5,21 @@ from .models import Friend
 from .forms import FriendForm
 
 
+def edit(request, num):
+    obj = Friend.objects.get(id=num)
+    if(request.method == 'POST'):
+        friend = FriendForm(request.POST, instance=obj)
+        friend.save()
+        return redirect(to='/bt_hello')
+    params = {
+        'title': 'Hello',
+        'id': num,
+        'form': FriendForm(instance=obj),
+    }
+
+    return render(request, 'bt_hello/edit.html', params)
+
+
 def index(request):
     data = Friend.objects.all()
     params = {
@@ -19,7 +34,7 @@ def create(request):
         obj = Friend()
         friend = FriendForm(request.POST, instance=obj)
         friend.save()
-        return redirect(to='/hello')
+        return redirect(to='/bt_hello')
 
     params = {
         'title': 'Hello',
