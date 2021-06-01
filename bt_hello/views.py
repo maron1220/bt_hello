@@ -3,6 +3,29 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from .models import Friend
 from .forms import FriendForm
+from django.views.generic import ListView
+from django.views.generic import DetailView
+
+
+class FriendList(ListView):
+    model = Friend
+
+
+class FriendDetail(DetailView):
+    model = Friend
+
+
+def delete(request, num):
+    friend = Friend.objects.get(id=num)
+    if(request.method == 'POST'):
+        friend.delete()
+        return redirect(to='/bt_hello')
+    params = {
+        'title': 'Hello',
+        'id': num,
+        'obj': friend,
+    }
+    return render(request, 'bt_hello/delete.html', params)
 
 
 def edit(request, num):
